@@ -1,0 +1,84 @@
+* {
+font-family: "jaf-bernina-sans-narrow", sans-serif;
+margin: 0;
+padding: 0;
+}
+#wrapper {
+  position: relative;
+}
+.top_bar {
+  position: fixed;
+  top: 0;
+  z-index: 99;
+  background-color: #373334;
+  opacity: 0.75;
+  width: 100%;
+  padding: 10px 30px;
+  font-size: 1.8em;
+}
+.top_bar h1 {
+  background: -webkit-linear-gradient(#F44336, #B71C1C);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+.head_title {
+  /*width: 79%;*/
+  font-family: "swingdancer";
+  color: #F44336;
+  display: inline-block;
+  vertical-align: middle;
+  padding-right: 20px;
+}
+.container {
+  padding: 0 50px;
+}
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+#map {
+  height: 100vh;
+}
+.md-button.md-fab.md-mini {
+      line-height: 4rem;
+      width: 4rem;
+      height: 4rem;
+}
+.material-icons {
+  padding-top: 20px;
+}
+.message {
+  position: fixed;
+  top: 100px;
+  left: 10%;
+  opacity: 0.7;
+  z-index: 99;
+  width: 80%;
+  height: 60vh;
+  margin-top: 50px;
+  border-radius: 6px;
+
+}
+md-content {
+ padding: 10px 50px;
+}
+ul {
+  list-style-image: url(../imgs/ic_error_outline_black_24dp_1x.png);
+}
+a {
+  text-decoration: none;
+  color: #F44336;
+}
+a:hover {
+  color: #B71C1C;
+  font-style: italic;
+}
+.alert_text {
+  text-align: justify;
+}
+.alert-head h3 {
+  text-align: center;
+}

@@ -1,0 +1,23 @@
+
+<div ng-controller="mapController">
+
+  <div id="map">
+
+  </div>
+<div class="message md-whiteframe-4dp" layout="column" ng-cloak ng-if='country_card'>
+  <md-toolbar class="md-primary" layout="row">
+    <div class="md-toolbar-tools">
+      <h2 class="md-flex" flex="90">{{selected_country}}</h2>
+      <md-button flex="10" ng-click="close()"><i class="material-icons">close</i></md-button>
+    </div>
+  </md-toolbar>
+  <md-content flex>
+    <div class="alert_head">
+      <h3>U.S Department of State Travel {{selection}}</h3>
+    </div>
+    <div class="alert_text" ng-bind-html="deliberatelyTrustDangerousSnippet()">
+      {{selected_text}}
+    </div>
+
+  </md-content>
+</div>
