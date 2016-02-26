@@ -36,22 +36,44 @@
 
       <div class="top_bar md-menu-origin md-whiteframe-4dp" layout="row">
 
-        <span class="left" flex="80">
+        <span class="left" flex="90">
           <h1 class="head_title">Danger Zones</h1>
-          <md-button class="md-raised md-primary" ng-click="what()">What is Danger Zones?</md-button>
+
         </span>
 
-        <span class="right" flex="20">
-          <md-button class="md-fab md-mini md-primary" aria-label="Send Email">
+        <span class="right" flex="10">
+          <md-button class="md-raised md-primary" ng-click="what()">What is Danger Zones?</md-button>
+          <!-- <md-button class="md-fab md-mini md-primary" aria-label="Send Email">
             <i class="material-icons">mail_outline</i>
           </md-button>
           <md-button class="md-fab md-mini md-primary" aria-label="Send Text">
             <i class="material-icons">phone_iphone</i>
-          </md-button>
+          </md-button> -->
         </span>
 
 
       </div>
+      <div class="filters">
+        <div class="banner">
+          Filter by countries under threat of:
+        </div>
+        <md-button class="filter_button md-accent md-raised" aria-label="terrorism filter" ng-click="terrorFilter()">
+          <span class="md-accent"> </span>Terrorism <i class="fa fa-bomb"></i></span>
+        </md-button>
+        <md-button class="filter_button md-accent md-raised" aria-label="terrorism filter" ng-click="disasterFilter()">
+          <span class="md-accent"> </span>Natural Disasters <i class="fa fa-bolt"></i></span>
+        </md-button>
+        <md-button class="filter_button md-accent md-raised" aria-label="terrorism filter" ng-click="kidnappingFilter()">
+          <span class="md-accent"> </span>Kidnapping <i class="fa fa-child"></i></span>
+        </md-button>
+
+
+
+      </div>
+
+      <md-button class="clear_button md-accent md-raised" aria-label="terrorism filter" ng-click="clearFilters()">
+        <span class="md-accent md-hue-1"> </span>Clear Filters <i class="fa fa-eraser"></i></span>
+      </md-button>
 
       <div ng-view="" class="main_screen">
 

@@ -8,5 +8,10 @@ danger_zone.config(function($routeProvider, $locationProvider, $mdThemingProvide
     .otherwise({
       redirectTo: '/'
     });
-    $mdThemingProvider.theme('default').primaryPalette('red');
+    $mdThemingProvider.theme('default')
+      .primaryPalette('red')
+      .accentPalette('orange', {
+        'default': '800',
+        'hue-1': '100'
+      });
 });

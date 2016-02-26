@@ -1,4 +1,4 @@
-danger_zone.controller('mapController', function($scope, $sce, $location, $routeParams, mapFactory) {
+danger_zone.controller('mapController', function($scope, $sce, $location, $window, $routeParams, mapFactory) {
   //scope variables declaration;
   $scope.warnings = [];
   $scope.country_names = [['Country', 'Alert Level']];
@@ -8,14 +8,12 @@ danger_zone.controller('mapController', function($scope, $sce, $location, $route
   $scope.current_news = [];
   $scope.stories = [];
   $scope.story_display_count = 3;
-
     //load google charts and call draw maps function
     google.charts.load('current', {'packages':['geochart']});
     google.charts.setOnLoadCallback(drawRegionsMap);
 
     //function to draw google geochart map
-    function drawRegionsMap() {
-
+  function drawRegionsMap() {
       //supplies data to geochart in the form of an array containing country name and alert level.  this tells geochart which countries to highlight and in what color
       var data = google.visualization.arrayToDataTable(
         $scope.country_names
@@ -43,9 +41,7 @@ danger_zone.controller('mapController', function($scope, $sce, $location, $route
                   message += '{row:' + item.row + '}';
               } else if (item.column != null) {
                   message += '{column:' + item.column + '}';
-
               }
-
           }
 
           $scope.name = $scope.country_names[item.row + 1][0];
@@ -157,6 +153,73 @@ danger_zone.controller('mapController', function($scope, $sce, $location, $route
   }
   $scope.expandStoryList = function() {
     $scope.story_display_count += 3;
+  }
+  $scope.terrorFilter = function() {
+    $scope.country_names = [['Country', 'Alert Level']];
+    for(x in $scope.alerts) {
+      var y = $scope.alerts[x].description[0].search("terrorist");
+      if (y > 0) {
+        $scope.country_names.push([$scope.alerts[x].title[0], 400]);
+      }
+    }
+    for(a in $scope.warnings) {
+      var b = $scope.warnings[a].description[0].search("terrorist");
+      if (b > 0) {
+        $scope.country_names.push([$scope.warnings[a].title[0], 800]);
+      }
+    }
+    drawRegionsMap();
+    console.log($scope.warnings);
+  }
+  $scope.disasterFilter = function() {
+    $scope.country_names = [['Country', 'Alert Level']];
+    for(x in $scope.alerts) {
+      var y = $scope.alerts[x].description[0].search("weather");
+      if (y > 0) {
+        $scope.country_names.push([$scope.alerts[x].title[0], 400]);
+      }
+    }
+    for(a in $scope.alerts) {
+      var b = $scope.alerts[a].description[0].search("earthquakes");
+      if (b > 0) {
+        $scope.country_names.push([$scope.alerts[a].title[0], 400]);
+      }
+    }
+    for(c in $scope.warnings) {
+      var d = $scope.warnings[c].description[0].search("weather");
+      if (d > 0) {
+        $scope.country_names.push([$scope.warnings[c].title[0], 800]);
+      }
+    }
+    for(e in $scope.warnings) {
+      var f = $scope.warnings[e].description[0].search("earthquakes");
+      if (f > 0) {
+        $scope.country_names.push([$scope.warnings[e].title[0], 800]);
+      }
+    }
+    drawRegionsMap();
+    console.log($scope.warnings);
+  }
+  $scope.kidnappingFilter = function() {
+    $scope.country_names = [['Country', 'Alert Level']];
+    for(x in $scope.alerts) {
+      var y = $scope.alerts[x].description[0].search("kidnapping");
+      if (y > 0) {
+        $scope.country_names.push([$scope.alerts[x].title[0], 400]);
+      }
+    }
+    for(a in $scope.warnings) {
+      var b = $scope.warnings[a].description[0].search("kidnapping");
+      if (b > 0) {
+        $scope.country_names.push([$scope.warnings[a].title[0], 800]);
+      }
+    }
+    drawRegionsMap();
+    console.log($scope.warnings);
+  }
+  $scope.clearFilters = function() {
+    console.log('yes');
+    $window.location.reload();
   }
 
 })

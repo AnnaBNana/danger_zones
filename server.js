@@ -10,20 +10,26 @@ app.use(express.static(path.join(__dirname, './client')));
 
 require('./server/config/mongoose.js');
 
+//dependencies for http requests, parsing xml to json, db, and cron jobs
 var http = require('http');
 var request = require('request');
 var parseString = require('xml2js').parseString;
 var mongoose = require('mongoose');
 var Warning = mongoose.model('Warning');
+var Alert = mongoose.model('Alert');
 var CronJob = require('cron').CronJob;
 
-new CronJob('00 00 06 * * 0-6', function() {
+//cron job to handle retrieval of travel warnings from US state dept.
+new CronJob('00 00 12 * * 0-6', function() {
   console.log('new warnings stored');
+  //retrieves data from xml file
   var url = 'http://travel.state.gov/_res/rss/TWs.xml';
   request(url, function(error, response, body) {
     if(!error) {
+      //parse xml to JSON
       parseString(body, function (err, result) {
           var warnings_arr = result.rss.channel;
+          //remove all from database
           Warning.remove({}, function(err, result) {
             if(err) {
               console.log(err);
@@ -31,6 +37,7 @@ new CronJob('00 00 06 * * 0-6', function() {
               console.log(result)
             }
           })
+          //replace data in db with results from most recent API call
           var warningInstance = new Warning({data: warnings_arr});
           warningInstance.save(function(err, result) {
             if(err) {
@@ -48,14 +55,19 @@ new CronJob('00 00 06 * * 0-6', function() {
   })
 }, null, true, 'America/Los_Angeles');
 
-new CronJob('00 00 06 * * 0-6', function() {
+//cron job for call to state dept API to retrieve travel alerts
+new CronJob('00 00 12 * * 0-6', function() {
   console.log('new alerts stored');
+  //retrieves data from xml file
   var url = 'http://travel.state.gov/_res/rss/TAs.xml';
   request(url, function(error, response, body) {
     if(!error) {
+      //parse xml to json
       parseString(body, function (err, result) {
           // console.dir(result);
+          //strip object layers down to essential data
           var alerts_arr = result.rss.channel;
+          //remove all content from previous responses from db
           Alert.remove({}, function(err, result) {
             if(err) {
               console.log(err);
@@ -63,6 +75,7 @@ new CronJob('00 00 06 * * 0-6', function() {
               console.log('alerts delete', result);
             }
           })
+          //save new data to db
           var alertInstance = new Alert({data: alerts_arr});
           alertInstance.save(function(err, result) {
             if(err) {
@@ -71,7 +84,7 @@ new CronJob('00 00 06 * * 0-6', function() {
               console.log('alerts save', result);
             }
           })
-          res.json(result);
+          console.log(result)
       });
 
     } else {
