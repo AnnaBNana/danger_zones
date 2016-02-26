@@ -217,6 +217,23 @@ danger_zone.controller('mapController', function($scope, $sce, $location, $windo
     drawRegionsMap();
     console.log($scope.warnings);
   }
+  $scope.politicalFilter = function() {
+    $scope.country_names = [['Country', 'Alert Level']];
+    for(x in $scope.alerts) {
+      var y = $scope.alerts[x].description[0].search("political");
+      if (y > 0) {
+        $scope.country_names.push([$scope.alerts[x].title[0], 400]);
+      }
+    }
+    for(a in $scope.warnings) {
+      var b = $scope.warnings[a].description[0].search("political");
+      if (b > 0) {
+        $scope.country_names.push([$scope.warnings[a].title[0], 800]);
+      }
+    }
+    drawRegionsMap();
+    console.log($scope.warnings);
+  }
   $scope.clearFilters = function() {
     console.log('yes');
     $window.location.reload();
