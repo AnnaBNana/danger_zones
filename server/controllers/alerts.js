@@ -1,20 +1,17 @@
 var http = require('http');
 var request = require('request');
 var parseString = require('xml2js').parseString;
+var mongoose = require('mongoose');
+var Alert = mongoose.model('Alert');
 
 module.exports = (function() {
   return {
     index:function(req, res) {
-      var url = 'http://travel.state.gov/_res/rss/TAs.xml';
-      request(url, function(error, response, body) {
-        if(!error) {
-          parseString(body, function (err, result) {
-              // console.dir(result);
-              res.json(result);
-          });
-
+      Alert.find({}, function(err, results) {
+        if(err) {
+          console.log(err);
         } else {
-          console.log(error);
+          res.json(results);
         }
       })
     }

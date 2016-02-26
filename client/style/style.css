@@ -43,14 +43,14 @@ html, body {
   height: 100vh;
 }
 .md-button.md-fab.md-mini {
-      line-height: 4rem;
-      width: 4rem;
-      height: 4rem;
+    line-height: 4rem;
+    width: 4rem;
+    height: 4rem;
 }
 .material-icons {
   padding-top: 20px;
 }
-.message {
+.message, .about {
   position: fixed;
   top: 100px;
   left: 10%;
@@ -59,8 +59,22 @@ html, body {
   width: 80%;
   height: 60vh;
   margin-top: 50px;
-  border-radius: 6px;
-
+}
+.news_box h3, .alert_head h3 {
+  text-decoration: underline;
+  margin-bottom: 10px;
+}
+.news_box {
+  border-bottom: 1px solid #F44336;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+.news a {
+  color: #0288D1;
+}
+.expand {
+  margin-top: 10px;
+  font-weight: bold;
 }
 md-content {
  padding: 10px 50px;
@@ -81,4 +95,39 @@ a:hover {
 }
 .alert-head h3 {
   text-align: center;
+}
+.about .alert_text {
+  padding-top: 20px;
+}
+.about {
+  width: 40%;
+  left: 30%;
+}
+.DZs_summary {
+  list-style: none;
+}
+.yellow {
+  background-color: #FFEE58;
+}
+.yellow400 {
+  color: #FFEE58;
+}
+.red {
+  background-color: #F44336;
+}
+.red500 {
+  color: #F44336;
+}
+.blue700 {
+  color: #0288D1;
+}
+.lightgreen700 {
+  color: #689F38;
+}
+.lime700 {
+  color: #AFB42B;
+  font-size: 3em;
+  display: block;
+  text-align: center;
+  padding-bottom: 20px;
 }

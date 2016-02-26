@@ -1,23 +1,65 @@
 
-<div ng-controller="mapController">
+<div>
 
   <div id="map">
 
   </div>
-<div class="message md-whiteframe-4dp" layout="column" ng-cloak ng-if='country_card'>
-  <md-toolbar class="md-primary" layout="row">
-    <div class="md-toolbar-tools">
-      <h2 class="md-flex" flex="90">{{selected_country}}</h2>
-      <md-button flex="10" ng-click="close()"><i class="material-icons">close</i></md-button>
-    </div>
-  </md-toolbar>
-  <md-content flex>
-    <div class="alert_head">
-      <h3>U.S Department of State Travel {{selection}}</h3>
-    </div>
-    <div class="alert_text" ng-bind-html="deliberatelyTrustDangerousSnippet()">
-      {{selected_text}}
-    </div>
 
-  </md-content>
+  <div class="message md-whiteframe-4dp" layout="column" ng-cloak ng-if='country_card'>
+    <md-toolbar class="md-primary" layout="row">
+      <div class="md-toolbar-tools">
+        <h2 class="md-flex" flex="90">{{selected_country}}</h2>
+        <md-button flex="10" ng-click="close()"><i class="material-icons">close</i></md-button>
+      </div>
+    </md-toolbar>
+    <md-content flex>
+
+      <div class="news_box">
+        <h3>Most recent NY Times stories about {{selected_country}}</h3>
+        <div class="news" ng-repeat="story in stories | limitTo: story_display_count">
+          <a target="_blank" href="{{story.url}}">{{story.headline}}</a>
+        </div>
+        <a class="expand" ng-click="expandStoryList()">See More</a>
+      </div>
+
+      <div class="alert_box">
+        <div class="alert_head">
+          <h3>U.S Department of State Travel {{selection}}</h3>
+        </div>
+        <h4>Alert Date: {{date}}</h4>
+        <div class="alert_text" ng-bind-html="deliberatelyTrustDangerousSnippet()">
+          {{selected_text}}
+        </div>
+      </div>
+
+    </md-content>
+  </div>
+
+  <div class="about md-whiteframe-4dp" layout="column" ng-cloak ng-if='about_DZ'>
+    <md-toolbar class="md-primary" layout="row">
+      <div class="md-toolbar-tools">
+        <h2 class="md-flex" flex="90">Welcome to Danger Zones</h2>
+        <md-button flex="10" ng-click="close()"><i class="material-icons">close</i></md-button>
+      </div>
+    </md-toolbar>
+    <md-content flex>
+      <div class="alert_head">
+        <h3></h3>
+      </div>
+      <div class="alert_text">
+        <i class="fa fa-globe lime700"></i>
+        There's a lot going on in the world today.  You want to see the world, but you want to be safe.  Danger zones was built for you.  Danger zones visually represents travel advisories issued by the U.S. Sate Department.  Armed with the information presented here, travelers can decide whether trips to highlighted countries is worth the risk.
+
+        <ul class="DZs_summary">
+          <i class="fa fa-exclamation yellow400"></i><li>Countries highlighted in <span class="yellow">yellow</span> have current alerts.  They are temporarily unsafe for travel due to transient conditions such as extreme weather conditions or elections in politically unstable regions.</li>
+          <i class="fa fa-exclamation-triangle red500"></i><li>Countries highlighted in <span class="red">red</span> have current warnings, and pose a serious and ongoing threat to traveler safety, including, but not limited to: piracy, sexual violence, and terrorist activity.</li>
+          <i class="fa fa-map-o blue700"></i><li>Click on a highlighted country to read the text of the travel alert or warning.  In addition, links are provided to pertinent news stories regarding the situation in the country in question.</li>
+          <i class="fa fa-info-circle lightgreen700"></i><li>For more information, or to contact the U.S State Department, visit them here: <a href="http://www.state.gov/travel/">U.S. State Department Travel</a></li>
+        </ul>
+
+      </div>
+
+    </md-content>
+  </div>
+
 </div>

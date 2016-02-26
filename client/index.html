@@ -11,6 +11,7 @@
     <script src="./bower_components/angular-aria/angular-aria.js" type="text/javascript" ></script>
     <script src="./bower_components/angular-material/angular-material.js" type="text/javascript" ></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <script src="https://use.typekit.net/hwi5qbr.js"></script>
     <script>try{Typekit.load({ async: true });}catch(e){}</script>
     <!-- my local stylesheet -->
@@ -30,17 +31,17 @@
 
 
   </head>
-  <body>
+  <body ng-controller="mapController">
     <div id="wrapper">
 
       <div class="top_bar md-menu-origin md-whiteframe-4dp" layout="row">
 
-        <span class="left" flex="90">
+        <span class="left" flex="80">
           <h1 class="head_title">Danger Zones</h1>
-          <md-button class="md-raised md-primary">What is Danger Zones?</md-button>
+          <md-button class="md-raised md-primary" ng-click="what()">What is Danger Zones?</md-button>
         </span>
 
-        <span class="right" flex="10">
+        <span class="right" flex="20">
           <md-button class="md-fab md-mini md-primary" aria-label="Send Email">
             <i class="material-icons">mail_outline</i>
           </md-button>

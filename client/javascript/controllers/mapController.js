@@ -5,6 +5,9 @@ danger_zone.controller('mapController', function($scope, $sce, $location, $route
   $scope.alerts = [];
   $scope.selected_county = "";
   $scope.arrayPositon = 0;
+  $scope.current_news = [];
+  $scope.stories = [];
+  $scope.story_display_count = 3;
 
     //load google charts and call draw maps function
     google.charts.load('current', {'packages':['geochart']});
@@ -55,22 +58,24 @@ danger_zone.controller('mapController', function($scope, $sce, $location, $route
               $scope.selected_text = $scope.alerts[i].description[0];
               $scope.arrayPosition = i;
               $scope.selection = 'Alert';
-              // console.log($scope.selected_text)
+              $scope.date = $scope.alerts[i].pubDate[0];
             }
           }
+
           for (var j = 0; j < $scope.warnings.length; j++) {
             if ($scope.warnings[j].title[0] == $scope.name) {
               $scope.selected_text = $scope.warnings[j].description[0];
               $scope.arrayPosition = j;
               $scope.selection = 'Warning';
-              // console.log($scope.selected_text);
+              $scope.date = $scope.warnings[i].pubDate[0];
             }
           }
 
           $scope.selected_country = $scope.name;
-
-          console.log($scope.arrayPosition);
+          $scope.getNews($scope.selected_country, $scope.date);
+          // console.log($scope.arrayPosition);
           $scope.country_card = true;
+          $scope.about_DZ = false;
           // console.log($scope.country_card);
           $scope.$apply();
       }
@@ -83,13 +88,15 @@ danger_zone.controller('mapController', function($scope, $sce, $location, $route
   google.load('visualization', '1', {packages: ['geochart'], callback: drawRegionsMap});
 
   mapFactory.alerts_index(function(data) {
-    $scope.alerts = data.rss.channel[0].item;
+    // console.log(data[0].data[0].item);
+    $scope.alerts = data[0].data[0].item;
     alertCountryNameConverter();
-    console.log('alerts', $scope.alerts);
+    // console.log('alerts', $scope.alerts);
   })
 
   mapFactory.warnings_index(function(data) {
-    $scope.warnings = data.rss.channel[0].item;
+    // console.log(data[0].data[0].item);
+    $scope.warnings = data[0].data[0].item;
     // console.log($scope.alerts);
     warningCountryNameConverter();
     // console.log('warnings', $scope.warnings);
@@ -125,6 +132,31 @@ danger_zone.controller('mapController', function($scope, $sce, $location, $route
   };
   $scope.close = function() {
     $scope.country_card = false;
+    $scope.about_DZ = false;
+    $scope.story_display_count = 3;
+    $scope.stories = [];
+  }
+  $scope.what = function() {
+    $scope.about_DZ = true;
+    console.log($scope.about_DZ);
+    $scope.country_card = false;
+  }
+  $scope.getNews = function(country, date) {
+    console.log(country, date);
+    $scope.country_info = {country: country, date: date};
+    mapFactory.getNews($scope.country_info, function(data) {
+      $scope.current_news = data;
+      // console.log($scope.current_news.response.docs);
+      for (x in $scope.current_news.response.docs) {
+        var headline = $scope.current_news.response.docs[x].headline.main;
+        var url = $scope.current_news.response.docs[x].web_url;
+        $scope.stories.push({headline: headline, url: url});
+      }
+      console.log($scope.stories);
+    })
+  }
+  $scope.expandStoryList = function() {
+    $scope.story_display_count += 3;
   }
 
 })
