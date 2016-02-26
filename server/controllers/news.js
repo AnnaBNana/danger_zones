@@ -36,7 +36,7 @@ module.exports = (function() {
 
 
 
-      var url = 'http://api.nytimes.com/svc/search/v2/articlesearch.json?fq=glocations:(' + req.body.country + ')&page1&begin_date=' + final_date +  '& sort=newest&api-key=01b2fb05eb525e892fc97dee393f8634:15:74528666';
+      var url = 'http://api.nytimes.com/svc/search/v2/articlesearch.json?fq=glocations:(' + req.body.country + ')&page1&begin_date=' + final_date +  '& sort=newest&api-key=YOUR_API_KEY';
       request(url, function(error, response, body) {
         if(!error) {
           res.json(response);
