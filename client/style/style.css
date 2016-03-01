@@ -25,7 +25,7 @@ padding: 0;
 }
 .head_title {
   /*width: 79%;*/
-  font-family: "swingdancer";
+  font-family: "swingdancer", Verdana, sans-serif;;
   color: #F44336;
   display: inline-block;
   vertical-align: middle;

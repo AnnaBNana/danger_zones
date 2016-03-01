@@ -2,7 +2,7 @@ danger_zone.factory('mapFactory', function($http) {
   var factory = {};
   var alerts = [];
   var news = [];
-  console.log('factory');
+  // console.log('factory');
 
   factory.warnings_index = function(callback) {
     $http.get('/warnings').success(function(output) {
@@ -17,7 +17,7 @@ danger_zone.factory('mapFactory', function($http) {
     })
   }
   factory.getNews = function(info, callback) {
-    console.log(info.date);
+    // console.log(info.date);
 
     var fixDate = function(date) {
       // console.log(date);

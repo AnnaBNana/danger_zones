@@ -8,6 +8,7 @@ danger_zone.controller('mapController', function($scope, $sce, $location, $windo
   $scope.current_news = [];
   $scope.stories = [];
   $scope.story_display_count = 3;
+
     //load google charts and call draw maps function
     google.charts.load('current', {'packages':['geochart']});
     google.charts.setOnLoadCallback(drawRegionsMap);
@@ -72,7 +73,7 @@ danger_zone.controller('mapController', function($scope, $sce, $location, $windo
           // console.log($scope.arrayPosition);
           $scope.country_card = true;
           $scope.about_DZ = false;
-          // console.log($scope.country_card);
+          // console.log($scope.stories);
           $scope.$apply();
       }
 
@@ -125,7 +126,7 @@ danger_zone.controller('mapController', function($scope, $sce, $location, $windo
     else if ($scope.selection == 'Alert') {
       return $sce.trustAsHtml($scope.alerts[$scope.arrayPosition].description[0]);
     }
-  };
+  }
   $scope.close = function() {
     $scope.country_card = false;
     $scope.about_DZ = false;
@@ -138,17 +139,22 @@ danger_zone.controller('mapController', function($scope, $sce, $location, $windo
     $scope.country_card = false;
   }
   $scope.getNews = function(country, date) {
-    console.log(country, date);
+    // console.log(country, date);
     $scope.country_info = {country: country, date: date};
     mapFactory.getNews($scope.country_info, function(data) {
       $scope.current_news = data;
-      // console.log($scope.current_news.response.docs);
+      console.log($scope.current_news.response.docs);
       for (x in $scope.current_news.response.docs) {
-        var headline = $scope.current_news.response.docs[x].headline.main;
+        var headline;
+        if($scope.current_news.response.docs[x].headline.print_headline) {
+          headline = $scope.current_news.response.docs[x].headline.print_headline;
+        } else {
+          headline = $scope.current_news.response.docs[x].headline.main;
+        }
+
         var url = $scope.current_news.response.docs[x].web_url;
         $scope.stories.push({headline: headline, url: url});
       }
-      console.log($scope.stories);
     })
   }
   $scope.expandStoryList = function() {

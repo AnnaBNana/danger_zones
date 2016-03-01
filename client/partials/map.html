@@ -17,7 +17,9 @@
       <div class="news_box">
         <h3>Most recent NY Times stories about {{selected_country}}</h3>
         <div class="news" ng-repeat="story in stories | limitTo: story_display_count">
-          <a target="_blank" href="{{story.url}}">{{story.headline}}</a>
+
+            <a target="_blank" href="{{story.url}}">{{story.headline}}</a>
+
         </div>
         <a class="expand" ng-click="expandStoryList()">See More</a>
       </div>
