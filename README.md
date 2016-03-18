@@ -1,6 +1,8 @@
 #Danger Zones
 
-view the latest travel alerts and warnings from the US state dept.
+View the latest travel alerts and warnings from the US state dept. in visual form.  The app highlights areas on the map deemed dangerous for travel.  Clickable countries expand to show the text of travel warnings along with links to NY Times news articles pertaining to that country.  
+
+I'd love to hear feedback on the project.  I'm looking to expand the project to include several other similar news or data visualization tools.
 
 ###To Do:
 
