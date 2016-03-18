@@ -6,7 +6,7 @@ module.exports = (function() {
   return {
     index:function(req, res) {
       // console.log(req.body.date);
-      var url = 'http://api.nytimes.com/svc/search/v2/articlesearch.json?fq=glocations:(' + req.body.country + ')&page1&begin_date=' + req.body.date +  '& sort=newest&api-key=YOUR_API_KEY';
+      var url = 'http://api.nytimes.com/svc/search/v2/articlesearch.json?fq=glocations:(' + req.body.country + ')&page1&begin_date=' + req.body.date +  '& sort=newest&api-key=####';
       var fixDate = function(date) {
         // console.log(date);
         var temp_date = date.split(" ");
