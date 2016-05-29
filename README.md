@@ -13,4 +13,4 @@ I'd love to hear feedback on the project.  I'm looking to expand the project to 
 
 ###Deployed!
 
-View the project [here](http://ec2-52-32-240-198.us-west-2.compute.amazonaws.com/#/)
+View the project [here](http://ec2-52-25-133-147.us-west-2.compute.amazonaws.com/#/)
