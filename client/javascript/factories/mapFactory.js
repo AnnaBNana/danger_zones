@@ -17,12 +17,14 @@ danger_zone.factory('mapFactory', function($http) {
     })
   }
   factory.getNews = function(info, callback) {
-    // console.log(info.date);
+    console.log("what is this?", info.date);
 
     var fixDate = function(date) {
       // console.log(date);
       var temp_date = date.split(" ");
+      console.log(temp_date)
       var year = temp_date[3];
+      console.log(year)
       var temp_month = temp_date[2];
       var month = getMonthFromString(temp_month);
       if (month < 10) {
@@ -34,7 +36,6 @@ danger_zone.factory('mapFactory', function($http) {
       function getMonthFromString(mon){
          var d = Date.parse(mon + "1, 2012");
          if(!isNaN(d)){
-
             return new Date(d).getMonth() + 1;
          }
          return -1;
@@ -45,8 +46,10 @@ danger_zone.factory('mapFactory', function($http) {
     var final_date = fixDate(info.date);
 
     info['date'] = final_date;
+    console.log('final_date: ', final_date)
 
     $http.post('/news', info).success(function(output) {
+      console.log(output);
       temp_news = output;
       var news = angular.fromJson(temp_news.body);
       callback(news);
