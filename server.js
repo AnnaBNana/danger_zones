@@ -20,10 +20,10 @@ var Alert = mongoose.model('Alert');
 var CronJob = require('cron').CronJob;
 
 //cron job to handle retrieval of travel warnings from US state dept.
-new CronJob('00 00 12 * * 0-6', function() {
+new CronJob('20 21 * * *', function() {
   console.log('new warnings stored');
   //retrieves data from xml file
-  var url = 'http://travel.state.gov/_res/rss/TWs.xml';
+  var url = 'https://cadatacatalog.state.gov/storage/f/2013-11-24T21%3A00%3A58.223Z/tws.xml';
   request(url, function(error, response, body) {
     if(!error) {
       //parse xml to JSON
@@ -56,10 +56,10 @@ new CronJob('00 00 12 * * 0-6', function() {
 }, null, true, 'America/Los_Angeles');
 
 //cron job for call to state dept API to retrieve travel alerts
-new CronJob('00 00 12 * * 0-6', function() {
+new CronJob('17 21 * * *', function() {
   console.log('new alerts stored');
   //retrieves data from xml file
-  var url = 'http://travel.state.gov/_res/rss/TAs.xml';
+  var url = 'https://cadatacatalog.state.gov/storage/f/2013-11-24T21%3A00%3A30.424Z/tas.xml';
   request(url, function(error, response, body) {
     if(!error) {
       //parse xml to json
